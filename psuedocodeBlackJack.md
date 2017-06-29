@@ -34,19 +34,19 @@ initialize at index open
 
     * clears board after game 
     * clears bets - keeps ongoing balance of players current bank amount 
-    * shuffleDeck
-    * placeBet
+    * shuffle the deck
+    * player places new bet and deduct from Bank
 
 ##### placeBet 
 
     * player will have to input bet amount 
         * if bet amount is larger than bank amount return alert to player 
-        * else deduct amount from their bank and push to holding area 
+        * or else deduct amount from their bank and push to holding area 
         * set new balance in their bank 
 
 ##### dealCard
 
-    * player receives first card FACE UP -timeout to show cards one after the * other 
+    * player receives first card FACE UP -timeout to show cards one after the other 
     * dealer receives second card FACE DOWN 
     * player receives third card FACE UP 
     * dealer received fourth card FACE UP 
@@ -58,19 +58,19 @@ initialize at index open
     * Evaluate dealers face down card
             * if face down card and face up card are equal to value of 21 
             * show both cards to view 
-            * renderTable 
+            * clear the table 
             * if cards of player 1
-                * if player 1 cards > 21
+                * if player 1 cards are greater than 21
                     * alert player1 that they have busted 
-                * else if player1 cards <=21 && p1 cards > dealers cards
-                    * player bank = bank + bet * 2
-                * else if player1 cards = dealers cards
+                * else if player1 cards are less than or equal to 21 and p1 cards greater than dealers cards
+                    * add double their bet to their bank
+                * else if player1 cards equal dealers cards
                     * its a draw 
-            * renderTable 
+            * clean the table 
 
 ##### shuffleDeck
 
-    * var deck has 52 cards
+    * deck has 52 cards
     * all cards will hold their numeric value and face cards will be assigned 10, Ace is 1 or 11
     * use math random to randomize cards 
 
