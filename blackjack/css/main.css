@@ -1,0 +1,32 @@
+/** { border: 1px solid black}*/
+
+.container {
+    background: linear-gradient(135deg, #1f9e5f, #046335);
+    margin: 0 auto;
+    color: white;
+    align-items: center;
+};
+
+h1 {
+   color: red;
+   align-content: center;
+}
+
+ul {
+    list-style-type: none;   
+    border-color: black; 
+}
+
+.game-board {
+    background: url("diamonds/diamonds-A.svg");
+}
+
+#dealer1, #dealer2 {
+    background-image: url("images/diamonds/diamonds-A.svg");
+
+}
+
+.card {
+    width: 150px;
+    height: 225px;
+}
