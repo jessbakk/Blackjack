@@ -10,8 +10,10 @@ var cardValue;
 var playersHand = [];
 var dealersHand = [];
 
+var disableHit = false;
 
 $('#deal').addClass('btn-primary');
+$('#hit').addClass('btn-success');
 
 $('#deal').on('click', function() {
     randomCard();
@@ -30,6 +32,14 @@ $('#deal').on('click', function() {
     randomCard();
     dealersHand.push(cardValue);
     checkWinner();
+});
+
+$('#hit').on('click', function() {
+    randomCard();
+    playersHand.push(cardValue);
+    $('#hit').attr('disabled', disableHit);
+    console.log(cardId);
+    console.log(playersHand);
 });
 
 
@@ -52,11 +62,15 @@ function checkWinner() {
         console.log("BLACKJACK!");
     } else if (dealersTotal === 21) {
         console.log("Dealer has Blackjack");
-    } else if (playersTotal > dealersTotal) {
-        console.log("You win!");
+    } else if (playersTotal > 21) {
+        console.log("Busted!");
+    } else if (dealersTotal > 21) {
+      console.log("Dealer Busts!");  
     } else if (dealersTotal > playersTotal) {
         console.log("Dealer wins");
-    } else {
+    } else if (playersTotal > dealersTotal) {
+        console.log("You win!");
+    } else if (playersTotal === dealersTotal) {
         console.log("Push");
     }
 }
