@@ -16,16 +16,20 @@
 </head>
 <body class="container">
 
-    <h1>BLACKJACK</h1>
-    <div>
-        <div class="dealerCards card back-blue"></div>
-        <div class="dealerCards card back-blue"></div>
+    <h1 class = "red-text text-center">BLACKJACK</h1>
+    <div class= "col-xs-4 col-sm-6">
+        <div class="dealerCards card back-red" id = "dealer-card1"></div>
+        <div class="dealerCards card back-red" id = "dealer-card2"></div>
     </div>
-    <div>>
-        <div class="card back-red"></div>
-        <div class="card back-red"></div>
+    <div class = "col-xs-4 col-sm-6">
+        <div class="playerCards card back-blue" id = "player-card1"></div>
+        <div class="playerCards card back-blue" id = "player-card2"></div>
     </div>
-    
+     <button id="Bet" class="btn btn-success pull-right">Bet</button>
+   <button id="deal" class="btn btn-primary pull-right">Deal</button>
+   <div class = "img-circle">
+       </div>
+    <script src= "js/secondary.js"></script>
     <script src= "js/main.js"></script>
 </body>
 </html>
