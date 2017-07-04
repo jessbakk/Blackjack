@@ -4,7 +4,7 @@
     background: linear-gradient(135deg, #1f9e5f, #046335);
     margin: 0 auto;
     align-items: center;
-    padding: 50px;
+    padding: 0 200px;
 };
 
 h1 {
@@ -13,6 +13,15 @@ h1 {
 }
 
 .card {
-    width: 150px;
-    height: 225px;
+    width: 130px;
+    height: 190px;
 }
+
+div {
+    margin: 0 auto;
+}
+
+.dealerCards, .playerCards {
+    align-content: center;
+}
+

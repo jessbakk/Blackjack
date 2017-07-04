@@ -3,19 +3,49 @@ $(function() {
 var cardId;
 var cardValue;
 
+var bankroll = 1000;
+var currentBankroll;
+
+var currentBet = [];
+var totalBet;
+
 var playersHand = [];
 var playersTotal;
 
 var dealersHand = [];
 var dealersTotal;
 
-$('#deal').addClass('btn-primary');
-$('#hit').addClass('btn-success');
-
 $('#hit').attr('disabled','disabled');
-    $('#stand').attr('disabled','disabled');
+$('#stand').attr('disabled','disabled');
+$('#deal').attr('disabled','disabled');
+
+
+$('h1').css({color: "red", fontWeight: "bold", fontFamily: "Syncopate", fontSize: "75px", textAlign: "center"});
+
+$('#bet5').on('click', function() {
+    currentBet.push(5);
+    addBet();
+    $('#deal').attr('disabled',false);
+});
+
+$('#bet10').on('click', function() {
+    currentBet.push(10);
+    addBet();
+    $('#deal').attr('disabled',false);
+});
+
+$('#bet25').on('click', function() {
+    currentBet.push(25);
+    addBet();
+    $('#deal').attr('disabled',false);
+});
 
 $('#deal').on('click', function() {
+    subBankroll();
+    $('#bankroll').html(`Bankroll: $` + currentBankroll);
+    $('#bet5').attr('disabled', true);
+    $('#bet10').attr('disabled', true);
+    $('#bet25').attr('disabled', true);
     randomCard();
     playersHand.push(cardValue);
     $("#player-card1").addClass(cardId);
@@ -41,6 +71,8 @@ $('#hit').on('click', function() {
     addHand();
     if(playersTotal > 21) {
         console.log("BUST");
+        $("#dealer-card2").addClass(cardId);
+        $("#dealer-card2").removeClass('back-red');
     }
 });
 
@@ -62,6 +94,20 @@ $('#stand').on('click', function() {
         console.log("DEALER WINS");
     }
 });
+
+
+
+function addBet() {
+    var betSum = currentBet.reduce(function(sum, value) {
+        return sum + value;
+    }, 0); 
+    totalBet = betSum;
+        console.log("total bet: " + betSum); 
+}
+
+function subBankroll() {
+    return currentBankroll = bankroll - totalBet;
+}
 
 function randomCard() {
     var cardIdx = Math.floor((Math.random() * deck.length));
