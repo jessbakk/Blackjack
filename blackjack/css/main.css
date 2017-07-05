@@ -7,6 +7,7 @@
     padding: 0 200px;
 };
 
+
 h1 {
    align-content: center;
    
@@ -24,4 +25,5 @@ div {
 .dealerCards, .playerCards {
     align-content: center;
 }
+
 

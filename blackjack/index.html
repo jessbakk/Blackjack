@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blackjack</title>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
-    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
     <link href="https://fonts.googleapis.com/css?family=Damion|Meie+Script|Mr+Dafoe|Pinyon+Script|Syncopate" rel="stylesheet">
     <link rel="stylesheet" href="css/cardstarter.css">
     <link rel="stylesheet" href="css/main.css">
@@ -16,24 +14,28 @@
  	crossorigin="anonymous"></script>
 </head>
 <body class="container">
-
     <h1>Blackjack</h1>
-    <div class= "dealerHand">
-        <div class="dealerCards card back-red" id = "dealer-card1"></div>
-        <div class="dealerCards card back-red" id = "dealer-card2"></div>
+    <div id="dealersHand">
+        <p id="dealersTotal">Dealer's Hand</p>
+        <div class="dealerCards card back-red" id="dealer-card1"></div>
+        <div class="dealerCards card back-red" id="dealer-card2"></div>
     </div>
-    <div class = "playerHand">
-        <div class="playerCards card back-blue" id = "player-card1"></div>
-        <div class="playerCards card back-blue" id = "player-card2"></div>
+    <div id="playersHand">
+        <p id="playersTotal">Player's Hand</p>
+        
+        <div class="playerCards card back-blue" id="player-card1"></div>
+        <div class="playerCards card back-blue" id="player-card2"></div>
+        
     </div>
-    <p id = "bankroll">Bankroll: $1000</p>
-    <button id="bet5" class="btn btn-success pull-left">Bet $5</button>
-    <button id="bet10" class="btn btn-success pull-left">Bet $10</button>
-    <button id="bet25" class="btn btn-success pull-left">Bet $25</button>
+    <p id="bankroll">Bankroll: $1000</p>
+    <p id="currentBet"></p>
+    <button id="bet5" class="bet btn btn-success pull-left">Bet $5</button>
+    <button id="bet10" class="bet btn btn-success pull-left">Bet $10</button>
+    <button id="bet25" class="bet btn btn-success pull-left">Bet $25</button>
     <button id="deal" class="btn pull-right">Deal</button>
     <button id="hit" class="btn btn-success pull-right">Hit</button>
     <button id="stand" class="btn btn-success pull-right">Stand</button>
-    <script src= "js/secondary.js"></script>
-    <script src= "js/main.js"></script>
+    <script src="js/secondary.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
