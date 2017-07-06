@@ -15,6 +15,11 @@ var dealersTotal = 0;
 
 var hiddenCard;
 
+var win;
+var loss;
+var push;
+var blackjack;
+
 
 initialize();
 
@@ -50,93 +55,65 @@ $('#deal').on('click', function() {
     $('.bet').attr('disabled', true);
 
     playersHand.push(randomCard());
-    console.log("players first card " + playersHand[0].value);
     $("#player-card1").addClass(playersHand[0].id);
         $("#player-card1").removeClass('back-blue');
 
     dealersHand.push(randomCard());
-    console.log("dealers first card " + dealersHand[0].value);
     $("#dealer-card1").addClass(dealersHand[0].id);
         $("#dealer-card1").removeClass('back-red');
 
     playersHand.push(randomCard());
-    console.log("players second card " + playersHand[1].value);
     $("#player-card2").addClass(playersHand[1].id);
         $("#player-card2").removeClass('back-blue');
 
     $('#deal').attr('disabled', true);
 
     dealersHand.push(randomCard());
-    console.log("dealers second card " + dealersHand[1].value);
     hiddenCard = dealersHand[1].id;
-    console.log("dealers hidden card is " + hiddenCard);
 
     addHand("player");
     addHand("dealer");
 
     checkBjWinner();
-
+    handleBet();
+    
     $('#hit').attr('disabled', false);
     $('#stand').attr('disabled', false);
     $('#playersTotal').html(`Players Hand: ` + playersTotal);
+
     render();
 });
-
-
 
 $('#hit').on('click', function() {
     playersHand.push(randomCard());
     addHand("player");
    
     if(playersTotal > 21) {
-        console.log("BUST");
         $('#hit').attr('disabled', true);
         $('#stand').attr('disabled', true);
         $("#dealer-card2").addClass(hiddenCard);
         $("#dealer-card2").removeClass('back-red');
-        $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);
+        loss = true;
+        // $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);
     }
+    handleBet();
     render();
 
 });
 
-
-
 $('#stand').on('click', function() {
     $('#hit').attr('disabled', true);
-    $("#dealer-card2").addClass(hiddenCard);
-    $("#dealer-card2").removeClass('back-red');
-
+    $('#dealer-card2').addClass(hiddenCard);
+    $('#dealer-card2').removeClass('back-red');
     $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);
 
-    if(dealersTotal < 17) {
-        randomCard();
-        dealersHand.push(randomCard());
-        for (var i = 0; i < dealersHand.length; i++) {
-            var newCard = 
-            (`<div class="dealersCards card ${dealersHand[i].id}"></div>`); 
-        }
-        $('#dealersHand').append(newCard);
-        addHand("dealer");
-        $('#stand').trigger('click');
-
-
-    } else if(dealersTotal > 21) {
-        console.log("DEALER BUSTS");
-    } else if(playersTotal > dealersTotal) {
-        console.log("YOU WIN");
-    } else if (playersTotal === dealersTotal){
-        console.log("PUSH");
-    } else if(dealersTotal > playersTotal) {
-        console.log("DEALER WINS");
-    }
+    $('#stand').attr('disabled', true);
+    
+    winLogic();
+    handleBet();
+    render();
+     
 });
-
-function initialize() {
-    $('#hit').attr('disabled','disabled');
-    $('#stand').attr('disabled','disabled');
-    $('#deal').attr('disabled','disabled');
-}
 
 function addBet(amount) {
     var betSum = currentBet.reduce(function(sum, value) {
@@ -157,55 +134,120 @@ function addHand(whichPlayer) {
         dealersTotal = 0;
         for (var i = 0; i < dealersHand.length; i++) {
             var value = dealersHand[i].value;
-            console.log(value)
             dealersTotal += value;
-            console.log("dealers total: " + dealersTotal);
         } 
     }else if (whichPlayer === "player") {
         playersTotal = 0;
         for (var i = 0; i < playersHand.length; i++) {
             var value = playersHand[i].value;
-            console.log(value)
             playersTotal += value;
-            console.log("players total: " + playersTotal);
         }
     }
 
     return playersTotal;
-    }
+}
 
 
 function checkBjWinner() {
     if (playersTotal === 21 && dealersTotal === 21) {
-        console.log("Push");
         $("#dealer-card2").addClass(dealersHand[1].id);
         $("#dealer-card2").removeClass('back-red');
+        push = true;
     } else if(playersTotal === 21) {
         $("#dealer-card2").addClass(dealersHand[1].id);
         $("#dealer-card2").removeClass('back-red');
-        console.log("BLACKJACK!");
+        $('#playersTotal').html("BLACKJACK").css({color: "red", fontWeight: "bold", fontSize: "20px"});
+        blackjack = true;
     } else if (dealersTotal === 21) {
-        console.log("Dealer has Blackjack");
         $("#dealer-card2").addClass(dealersHand[1].id);
         $("#dealer-card2").removeClass('back-red');
-        
+        $('#dealersTotal').html("Dealer has Blackjack");
+        loss = true;
     } else if (playersTotal < 21) {
         $('#hit').attr('disabled', false);
         $('#stand').attr('disabled', false);
     } 
 }
 
+function winLogic() {
+    if(dealersTotal < 17) {
+            randomCard();
+            dealersHand.push(randomCard());
+            for (var i = 0; i < dealersHand.length; i++) {
+                var newCard = 
+                (`<div class="dealersCards card ${dealersHand[i].id}"></div>`); 
+            }
+                $('#dealersHand').append(newCard);
+                addHand("dealer");
+            $('#stand').trigger('click');
+    } else if(dealersTotal > 21) {
+        $('#dealersTotal').html("Dealer Busts").css({fontWeight: "bold"});
+        win = true;
+    } else if(playersTotal > dealersTotal) {
+        $('#playersTotal').html("YOU WIN").css({fontWeight: "bold"});
+        win = true;
+    } else if (playersTotal === dealersTotal){
+        $('#playersTotal').html("PUSH").css({fontWeight: "bold"});
+        $('#dealersTotal').html("PUSH").css({fontWeight: "bold"});
+        push = true;
+    } else if(dealersTotal > playersTotal) {
+        $('#dealersTotal').html("Dealer Wins").css({color: "red", fontWeight: "bold", fontSize: "20px"});
+        loss = true;
+    }
+}
+
+function handleBet() {
+    var totalWinLoss = 0;
+     if(blackjack) {
+         var blackjackWin = totalBet * 3;
+         totalWinLoss = blackjackWin +  bankroll;
+         bankroll = totalWinLoss;   
+         totalBet = 0;
+         console.log("blackjack win");
+
+    } else if(win) {
+        var handWin = totalBet * 2;
+         totalWinLoss = handWin + bankroll;
+         bankroll = totalWinLoss;
+         totalBet = 0;
+         console.log("regular win");
+
+    } else if(loss) {
+        totalBet = 0;
+        console.log("loss");
+
+    } else if(push) {
+        totalWinLoss = bankroll + totalBet
+        bankroll = totalWinLoss;
+        totalBet = 0;
+        console.log("push");  
+    }
+    
+}
+
 
 function render() {
+
     $('#playersTotal').html(`Player\'s Hand: ${playersTotal}`);
-    
+   
     $('#bankroll').html('Bankroll: $' + bankroll);
-    $('#currentBet').html(`Current Bet: $${totalBet}`)
+    $('#currentBet').html(`Current Bet: $${totalBet}`);
+
     for (var i = 0; i < playersHand.length; i++) {
         $('div#' + i).addClass(playersHand[i].id + ' playerCards card');
         $('div#' + i).removeClass('back-blue');
     }
+
     
+ 
+}
+
+function initialize() {
+
+    $('#hit').attr('disabled','disabled');
+    $('#stand').attr('disabled','disabled');
+    $('#deal').attr('disabled','disabled');
+ 
 }
 
 

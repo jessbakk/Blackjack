@@ -1,5 +1,9 @@
 /** { border: 1px solid black}*/
 
+html {
+    overflow: hidden;
+}
+
 .container {
     background: linear-gradient(135deg, #1f9e5f, #046335);
     margin: 0 auto;
