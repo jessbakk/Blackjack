@@ -1,4 +1,4 @@
-// $(function() {
+$(function() {
 
 var bankroll = 1000; 
 
@@ -166,17 +166,6 @@ function addHand(whichPlayer) {
 
     return playersTotal;
 }
-
-function computeHand() {
-//     // var ace = 0=;
-//     if (playersHand[i].value === 11) {
-//         ace++;
-//     }
-
-//  if(playersTotal > 21 && )
-}
-
-
 
 function checkBjWinner() {
     if (playersTotal === 21 && dealersTotal === 21) {
@@ -351,26 +340,11 @@ function endHand() {
     $('#stand').attr('disabled','disabled');
 }
 
-function renderGameMessage() {
-    var playerBlackjack
-    var playerWin
-    var playerBust
-    var push
-    var dealerBlackjack
-    var dealerWin
-    var dealerBust
-
-}
-
-
-
-
-
-
 
 $('h1').css({color: "red", fontWeight: "bold", fontFamily: "Syncopate", fontSize: "60px", textAlign: "center", paddingBottom: "0"});
 
 $('p').css({color: "white", fontFamily: "Syncopate", fontWeight: "bold", fontSize: "15px", margin: '0 auto'});
 
 
-// });
+
+});
