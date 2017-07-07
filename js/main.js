@@ -89,6 +89,7 @@ $('#hit').on('click', function() {
         $("#dealer-card2").addClass(hiddenCard);
         $("#dealer-card2").removeClass('back-red');
         loss = true;
+        showDealersHand = true;
         // $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);
     }
     handleBet();
@@ -112,7 +113,6 @@ $('#stand').on('click', function() {
 });
 
 $('#replay').on('click', function() {
-    console.log('clicked replay');
     $('#replay').attr('disabled', true);
     //wipe cards
     playersHand = [];
@@ -131,9 +131,9 @@ $('#replay').on('click', function() {
     totalBet = 0;
 
     //reinitialize bet buttons
+    //disable deal stand hit
     initialize()
 
-    //disable deal stand hit
 
     win = false;
     loss = false;
@@ -183,7 +183,7 @@ function checkBjWinner() {
         push = true;
     } else if(playersTotal === 21) {
         showDealersHand = true;        
-        $('#playersTotal').html("BLACKJACK").css({color: "red", fontWeight: "bold", fontSize: "20px"});
+        $('#playersTotal').html("BLACKJACK");
         blackjack = true;
     } else if (dealersTotal === 21) {
         showDealersHand = true;
@@ -200,16 +200,15 @@ function winLogic() {
         dealersHand.push(randomCard());
         addHand("dealer");
         winLogic();
-        console.log(dealersHand);
     } else if(dealersTotal > 21) {
-        $('#dealersTotal').html("Dealer Busts").css({fontWeight: "bold"});
+        $('#dealersTotal').html("Dealer Busts");
         win = true;
     } else if(playersTotal > dealersTotal) {
-        $('#playersTotal').html("YOU WIN").css({fontWeight: "bold"});
+        $('#playersTotal').html("YOU WIN");
         win = true;
     } else if (playersTotal === dealersTotal){
-        $('#playersTotal').html("PUSH").css({fontWeight: "bold"});
-        $('#dealersTotal').html("PUSH").css({fontWeight: "bold"});
+        $('#playersTotal').html("PUSH");
+        $('#dealersTotal').html("PUSH");
         push = true;
     } else if(dealersTotal > playersTotal) {
         $('#dealersTotal').html("Dealer Wins").css({color: "red", fontWeight: "bold", fontSize: "20px"});
@@ -219,7 +218,6 @@ function winLogic() {
 }
 
 function handleBet() {
-    console.log('handlebet');
     var totalWinLoss = 0;
     if(blackjack) {
          var blackjackWin = totalBet * 3;
@@ -227,7 +225,6 @@ function handleBet() {
          bankroll = totalWinLoss;   
          totalBet = 0;
          $('#replay').attr('disabled',false);
-         console.log("blackjack win");
 
     } else if(win) {
         var handWin = totalBet * 2;
@@ -235,19 +232,16 @@ function handleBet() {
          bankroll = totalWinLoss;
          totalBet = 0;
          $('#replay').attr('disabled',false);
-         console.log("regular win");
 
     } else if(loss) {
         totalBet = 0;
         $('#replay').attr('disabled',false);
-        console.log("loss");
 
     } else if(push) {
         totalWinLoss = bankroll + totalBet
         bankroll = totalWinLoss;
         totalBet = 0;
         $('#replay').attr('disabled',false);
-        console.log("push");  
     }     
 }
 
@@ -290,7 +284,6 @@ function renderBankroll() {
 }
 
 function renderPlayersCards() {
-    console.log('clearing cards from dom, but not touching state')
     $('div#0').removeClass();
     $('div#1').removeClass();
     $('div#2').removeClass();
