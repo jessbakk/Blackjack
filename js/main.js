@@ -104,10 +104,22 @@ $('#stand').on('click', function() {
 
     $('#stand').attr('disabled', true);
     
+    
     winLogic();
     handleBet();
     render();
      
+});
+
+$('#replay').on('click', function() {
+    console.log('clicked replay');
+    $('#replay').attr('disabled', true);
+    //wipe cards
+    //balance bets
+    //reinitialize bet buttons
+    //disable deal stand hit
+    //player hand view changed back
+    //dealer hand view changed back
 });
 
 function addBet(amount) {
@@ -193,12 +205,14 @@ function winLogic() {
 }
 
 function handleBet() {
+    console.log('handlebet');
     var totalWinLoss = 0;
-     if(blackjack) {
+    if(blackjack) {
          var blackjackWin = totalBet * 3;
          totalWinLoss = blackjackWin +  bankroll;
          bankroll = totalWinLoss;   
          totalBet = 0;
+         $('#replay').attr('disabled',false);
          console.log("blackjack win");
 
     } else if(win) {
@@ -206,19 +220,21 @@ function handleBet() {
          totalWinLoss = handWin + bankroll;
          bankroll = totalWinLoss;
          totalBet = 0;
+         $('#replay').attr('disabled',false);
          console.log("regular win");
 
     } else if(loss) {
         totalBet = 0;
+        $('#replay').attr('disabled',false);
         console.log("loss");
 
     } else if(push) {
         totalWinLoss = bankroll + totalBet
         bankroll = totalWinLoss;
         totalBet = 0;
+        $('#replay').attr('disabled',false);
         console.log("push");  
-    }
-    
+    }     
 }
 
 
@@ -247,6 +263,8 @@ function initialize() {
     $('#hit').attr('disabled','disabled');
     $('#stand').attr('disabled','disabled');
     $('#deal').attr('disabled','disabled');
+    $('#replay').attr('disabled','disabled');
+
  
 }
 
