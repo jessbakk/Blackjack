@@ -5,8 +5,6 @@ var bankroll = 1000;
 var currentBet = [];
 var totalBet = 0;
 
-var cardValue;
-
 var playersHand = [];
 var playersTotal = 0;
 
@@ -14,6 +12,7 @@ var dealersHand = [];
 var dealersTotal = 0;
 
 var hiddenCard;
+var showDealersHand = false
 
 var win;
 var loss;
@@ -22,10 +21,6 @@ var blackjack;
 
 
 initialize();
-
-$('h1').css({color: "red", fontWeight: "bold", fontFamily: "Syncopate", fontSize: "75px", textAlign: "center", paddingBottom: "0"});
-
-$('p').css({color: "white", fontFamily: "Syncopate", fontWeight: "bold", fontSize: "15px", margin: '0 auto'});
 
 render();
 
@@ -105,7 +100,7 @@ $('#stand').on('click', function() {
     $('#hit').attr('disabled', true);
     $('#dealer-card2').addClass(hiddenCard);
     $('#dealer-card2').removeClass('back-red');
-    $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);
+    showDealersHand = true;
 
     $('#stand').attr('disabled', true);
     
@@ -171,15 +166,15 @@ function checkBjWinner() {
 
 function winLogic() {
     if(dealersTotal < 17) {
-            randomCard();
-            dealersHand.push(randomCard());
-            for (var i = 0; i < dealersHand.length; i++) {
-                var newCard = 
-                (`<div class="dealersCards card ${dealersHand[i].id}"></div>`); 
-            }
-                $('#dealersHand').append(newCard);
-                addHand("dealer");
-            $('#stand').trigger('click');
+        dealersHand.push(randomCard());
+        for (var i = 0; i < dealersHand.length; i++) {
+            var newCard = 
+            (`<div class="dealersCards card ${dealersHand[i].id}"></div>`); 
+        }
+        $('#dealersHand').append(newCard);
+        addHand("dealer");
+        winLogic();
+        console.log(dealersHand);
     } else if(dealersTotal > 21) {
         $('#dealersTotal').html("Dealer Busts").css({fontWeight: "bold"});
         win = true;
@@ -194,6 +189,7 @@ function winLogic() {
         $('#dealersTotal').html("Dealer Wins").css({color: "red", fontWeight: "bold", fontSize: "20px"});
         loss = true;
     }
+    render()
 }
 
 function handleBet() {
@@ -238,7 +234,11 @@ function render() {
         $('div#' + i).removeClass('back-blue');
     }
 
-    
+    if (showDealersHand) {
+        $('#dealersTotal').html(`Dealer\'s Hand: ${dealersTotal}`);        
+    } else {
+        $('#dealersTotal').html(`Dealer\'s Hand`);
+    }
  
 }
 
@@ -251,6 +251,10 @@ function initialize() {
 }
 
 
+
+$('h1').css({color: "red", fontWeight: "bold", fontFamily: "Syncopate", fontSize: "75px", textAlign: "center", paddingBottom: "0"});
+
+$('p').css({color: "white", fontFamily: "Syncopate", fontWeight: "bold", fontSize: "15px", margin: '0 auto'});
 
 
 
