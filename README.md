@@ -45,8 +45,8 @@ And now you're ready to play and WIN!
 
 ##### Technologies Used 
 
-* HTML 
-* CSS 
+* HTML5 
+* CSS3 
 * Card Deck Starter CSS
 * JavaScript
 * JQuery
@@ -63,8 +63,10 @@ Absolutely no setup required. Use your personal browser of choice to play from a
 
 * **Double Down** - Player will have the ability to double their bet based on the dealers hand
 * **Split** - If Player has two of the same cards after the first draw, they are allowed to split their hand and play to hands at once (with double their bet)
+* **Hints** - Add a hint sheet to help player with next move
 * **Game Interaction** - Improved interface dynamic based off of user interaction
 * **Multi-Player/Hand** - Invite friends and family to play or play multiple hands at once
+
 * **
 
 
