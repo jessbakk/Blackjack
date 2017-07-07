@@ -1,6 +1,6 @@
 ![Blackjack](http://i.imgur.com/oA1DE1g.png "Blackjack")
 
-#  To Twenty One or Bust
+#  Twenty One or Bust
 
 ---
 
