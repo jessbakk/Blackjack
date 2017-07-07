@@ -19,7 +19,6 @@ var loss;
 var push;
 var blackjack;
 
-
 initialize();
 
 render();
@@ -147,7 +146,6 @@ function randomCard() {
     var deckIdx = Math.floor((Math.random() * deck.length));
     return deck[deckIdx];
 }
-
 
 function addHand(whichPlayer) {
     if (whichPlayer === "dealer") {
@@ -344,7 +342,6 @@ function endHand() {
 $('h1').css({color: "red", fontWeight: "bold", fontFamily: "Syncopate", fontSize: "60px", textAlign: "center", paddingBottom: "0"});
 
 $('p').css({color: "white", fontFamily: "Syncopate", fontWeight: "bold", fontSize: "15px", margin: '0 auto'});
-
 
 
 });
