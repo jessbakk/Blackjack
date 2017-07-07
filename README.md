@@ -24,8 +24,8 @@ Blackjack can be played with 2-6 players against a dealer. The main idea to reme
 
 #### Game Play
 
-* Start with you bet
-* Dealer deals hands in clockwise order (or if two players, player first then dealer) until all players have 2 cards to start
+* Start with your bet
+* Dealer deals hands in clockwise order (or if two players, player dealt first then dealer) until all players have 2 cards to start
 * Dealer keeps their second card hidden until player stands
 * Player performs actions first (see Player Actions below)
 * Once Player stands, Dealer shows cards and plays out their hand
@@ -43,12 +43,14 @@ Stand | Stops dealer from adding cards to your hand
 And now you're ready to play and WIN!
 
 
-##### Game Features 
+##### Technologies Used 
 
-* Built with HTML, CSS, JavaScript and JQuery. 
-* Playable from client browser
-* Single player against the dealer 
-* Game logic built in 
+* HTML 
+* CSS 
+* Card Deck Starter CSS
+* JavaScript
+* JQuery
+
 
 ##### Quick Start
 
