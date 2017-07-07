@@ -117,11 +117,29 @@ $('#replay').on('click', function() {
     //wipe cards
     playersHand = [];
     dealersHand = [];
-    //balance bets
-    //reinitialize bet buttons
-    //disable deal stand hit
+    
     //player hand view changed back
     //dealer hand view changed back
+    playersTotal = 0;
+    dealersTotal = 0;
+
+    showDealersHand = false;
+
+    //balance bets
+
+    currentBet = [];
+    totalBet = 0;
+
+    //reinitialize bet buttons
+    initialize()
+
+    //disable deal stand hit
+
+    win = false;
+    loss = false;
+    push = false;
+    blackjack = false;
+
 
     render();
 });
@@ -234,6 +252,11 @@ function handleBet() {
 }
 
 function initialize() {
+
+    $('#bet5').attr('disabled',false);
+    $('#bet10').attr('disabled',false);
+    $('#bet25').attr('disabled',false);
+
     $('#hit').attr('disabled','disabled');
     $('#stand').attr('disabled','disabled');
     $('#deal').attr('disabled','disabled');
